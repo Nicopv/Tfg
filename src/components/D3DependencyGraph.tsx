@@ -352,11 +352,17 @@ export const D3DependencyGraph: React.FC<D3DependencyGraphProps> = ({
       const nx = -dy / dist;
       const ny = dx / dist;
 
-      const midX = (sx + tx) / 2 + nx * curvature;
-      const midY = (sy + tx) / 2 + ny * curvature;
+      const controlX = (sx + tx) / 2 + nx * curvature;
+      const controlY = (sy + ty) / 2 + ny * curvature;
 
-      const path = `M ${sx} ${sy} Q ${midX} ${midY} ${tx} ${ty}`;
-      return { path, cx: midX, cy: midY };
+      const path = `M ${sx} ${sy} Q ${controlX} ${controlY} ${tx} ${ty}`;
+
+      // Keep the dependency pill attached to the visible quadratic curve.
+      // At t=0.5 the point is 1/4 start + 1/2 control + 1/4 end.
+      const labelX = 0.25 * sx + 0.5 * controlX + 0.25 * tx;
+      const labelY = 0.25 * sy + 0.5 * controlY + 0.25 * ty;
+
+      return { path, cx: labelX, cy: labelY };
     };
 
     // Links selection

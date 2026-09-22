@@ -74,6 +74,7 @@ export interface IncidentCase {
   zonaEntrada: string;
   consecuenciaAsistencialExacta: string;
   fuenteCorpus: string;
+  nivelEvidenciaConceptual: 'CONFIRMADO' | 'PARCIALMENTE DOCUMENTADO' | 'INFERIDO';
 }
 
 export interface RiskApproachComparison {

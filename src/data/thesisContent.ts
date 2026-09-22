@@ -50,8 +50,8 @@ export const AVAILABLE_VOICES: VoiceOption[] = [
 export const FUNCTIONAL_ZONES: FunctionalZone[] = [
   {
     id: 'infraestructura_ti',
-    name: 'Infraestructura IT',
-    shortName: 'Infraestructura IT',
+    name: 'Infraestructura TI y redes',
+    shortName: 'Infraestructura TI y redes',
     category: 'core_it',
     description:
       'Columna vertebral digital: redes de comunicaciones, servidores centralizados, hipervisores, almacenamiento SAN/NAS, Directorio Activo, DNS, DHCP y servicios de autenticación y respaldo.',
@@ -70,8 +70,8 @@ export const FUNCTIONAL_ZONES: FunctionalZone[] = [
   },
   {
     id: 'gestion_clinica',
-    name: 'Gestión Clínica',
-    shortName: 'Gestión Clínica',
+    name: 'Gestión clínica-asistencial',
+    shortName: 'Gestión clínica-asistencial',
     category: 'clinical_core',
     description:
       'Núcleo operativo del historial del paciente: Historias Clínicas Electrónicas (HCE/HIS), gestión de admisiones, asignación de camas, programación de quirófanos y órdenes médicas.',
@@ -90,8 +90,8 @@ export const FUNCTIONAL_ZONES: FunctionalZone[] = [
   },
   {
     id: 'diagnostico_imagen',
-    name: 'Diagnóstico por Imagen',
-    shortName: 'Diagnóstico por Imagen',
+    name: 'Diagnóstico por imagen',
+    shortName: 'Diagnóstico por imagen',
     category: 'diagnostic',
     description:
       'Servicios de radiología y medicina nuclear: adquisición, procesamiento, almacenamiento y distribución de estudios imagenológicos (TAC, Resonancia, Rayos X, Ecografías).',
@@ -110,8 +110,8 @@ export const FUNCTIONAL_ZONES: FunctionalZone[] = [
   },
   {
     id: 'laboratorio_farmacia',
-    name: 'Laboratorio y Farmacia',
-    shortName: 'Laboratorio y Farmacia',
+    name: 'Laboratorio y farmacia',
+    shortName: 'Laboratorio y farmacia',
     category: 'therapeutic',
     description:
       'Diagnóstico biológico y terapéutica farmacológica: analizadores bioquímicos, hematológicos y microbiológicos, junto a la dispensación y validación de medicamentos.',
@@ -130,8 +130,8 @@ export const FUNCTIONAL_ZONES: FunctionalZone[] = [
   },
   {
     id: 'urgencias_critica',
-    name: 'Urgencias y UCI',
-    shortName: 'Urgencias y UCI',
+    name: 'Urgencias y atención crítica',
+    shortName: 'Urgencias y atención crítica',
     category: 'critical',
     description:
       'Atención médica vital y tiempo-dependiente: servicio de urgencias médicas, triaje Manchester/Avanzado, Unidades de Cuidados Intensivos (UCI), Reanimación y Quirófanos de urgencia.',
@@ -150,8 +150,8 @@ export const FUNCTIONAL_ZONES: FunctionalZone[] = [
   },
   {
     id: 'conectividad_externa',
-    name: 'Conectividad Externa',
-    shortName: 'Conectividad Externa',
+    name: 'Conectividad externa',
+    shortName: 'Conectividad externa',
     category: 'perimeter',
     description:
       'Dependencias con proveedores y sistemas externos: interconexión del hospital con terceros (servicios de soporte remoto de proveedores vía VPN, plataformas en la nube, pasarelas de aseguradoras/clearinghouses, telemedicina y redes de salud externas). Representa una dependencia sistémica externa: no es necesariamente el origen o vector inicial de todos los ataques (los cuales a menudo comienzan en puntos internos), sino el conjunto de dependencias funcionales con entidades y sistemas fuera de la organización.',
@@ -178,7 +178,7 @@ export const DEPENDENCIES: Dependency[] = [
     type: 'tecnica',
     label: 'Infraestructura de Hosting y Red',
     description:
-      'El sistema de gestión clínica depende directamente de servidores virtuales, bases de datos y Active Directory alojados en Infraestructura IT.',
+      'El sistema de gestión clínica depende directamente de servidores virtuales, bases de datos y Active Directory alojados en infraestructura TI y redes.',
     clinicalImpact:
       'Si cae el Directorio Activo o los hipervisores, el personal clínico no puede autenticarse ni acceder a la Historia Clínica Electrónica.',
   },
@@ -189,7 +189,7 @@ export const DEPENDENCIES: Dependency[] = [
     type: 'tecnica',
     label: 'Conectividad de Red y Servidores LIS',
     description:
-      'Los analizadores biológicos y dispensadores automáticos requieren enlaces de red y servicios de middleware administrados por Infraestructura IT.',
+      'Los analizadores biológicos y dispensadores automáticos requieren enlaces de red y servicios de middleware administrados por infraestructura TI y redes.',
     clinicalImpact:
       'Pérdida de comunicación entre equipos de hematología y la base de datos de laboratorio.',
   },
@@ -200,7 +200,7 @@ export const DEPENDENCIES: Dependency[] = [
     type: 'tecnica',
     label: 'Almacenamiento SAN y Red DICOM',
     description:
-      'El PACS requiere volúmenes de almacenamiento masivo SAN y ancho de banda dedicado provisto por la zona de Infraestructura IT.',
+      'El PACS requiere volúmenes de almacenamiento masivo SAN y ancho de banda dedicado provisto por la zona de infraestructura TI y redes.',
     clinicalImpact:
       'Los radiólogos no pueden cargar estudios tomográficos ni transmitir imágenes a los quirófanos.',
   },
@@ -325,17 +325,18 @@ export const INCIDENT_CASES: IncidentCase[] = [
     vectorEntradaInicial:
       'Explotación de la vulnerabilidad MS17-010 (EternalBlue) vía protocolo SMB; sin interacción del usuario.',
     tecnicaMovimientoLateral:
-      'Autopropagación tipo gusano (worm); backdoor DoublePulsar; escaneo automático de puertos 139/445.',
+      'Autopropagación tipo gusano; backdoor mediante SMB; escaneo automático de sistemas vulnerables.',
     trayectoriaZonasTexto:
-      'Infra. TI y redes → diagnóstico por imagen (MRI bloqueados) → gestión clínica (HCE inaccesibles) → comunicaciones internas → urgencias y atención crítica.',
+      'Infraestructura TI y redes → diagnóstico por imagen → gestión clínica → comunicaciones internas → urgencias y atención crítica.',
     cronologia:
       'Propagación masiva en horas (12/05/2017); contención parcial mediante kill switch.',
     patronPropagacion:
-      'Horizontal masiva. Autónoma, intra e interorganizacional, sin barreras de red.',
-    zonaEntrada: 'Infra. TI y redes',
+      'Horizontal masiva.',
+    zonaEntrada: 'Infraestructura TI y redes',
     consecuenciaAsistencialExacta:
       '34 org. infectadas; 46 afectadas. 19.000 citas canceladas. Alto costo económico.',
     fuenteCorpus: 'Ghafur et al. (2019); ENISA (2023)',
+    nivelEvidenciaConceptual: 'CONFIRMADO',
     timeline: [
       {
         step: 1,
@@ -381,15 +382,16 @@ export const INCIDENT_CASES: IncidentCase[] = [
     year: 2020,
     country: 'Alemania',
     threatActorOrMalware: 'DoppelPaymer (Vulnerabilidad Citrix ADC)',
-    initialPoint: 'Gateway Citrix VPN expuesto y vulnerable (CVE-2019-19781)',
+    initialPoint:
+      'Compromiso previo de un Citrix NetScaler Gateway utilizado para acceso remoto, mediante una vulnerabilidad explotada antes de la instalación del parche de seguridad.',
     initialZoneId: 'conectividad_externa',
     trajectoryType: 'vertical_cascada',
     configurationLabel: 'Configuración Vertical en Cascada',
     configurationColor: '#f59e0b',
     summary:
-      'Un compromiso en el perímetro de acceso externo provocó una cascada vertical hacia la infraestructura central, cerrando urgencias y derivando a un paciente en estado crítico.',
+      'El compromiso previo de un servicio de acceso remoto precedió a la afectación de la infraestructura interna y a la exclusión de la atención de urgencias durante 13 días.',
     narrativeText:
-      'Düsseldorf presenta una configuración vertical en cascada, donde la interrupción de determinadas capacidades de infraestructura genera consecuencias sucesivas hacia otras funciones esenciales. Los atacantes vulneraron un servidor perimetral Citrix, escalaron hacia los servidores centrales de TI y provocaron el bloqueo de 30 servidores internos. Al paralizarse los sistemas de admisiones y gestión clínica, el hospital tuvo que desprogramar cirugías y cerrar urgencias; una paciente con aneurisma aórtico tuvo que ser derivada a Wuppertal (a más de 30 km), falleciendo durante el trayecto.',
+      'Düsseldorf presenta una configuración vertical en cascada. Un Citrix NetScaler Gateway utilizado para acceso remoto había sido comprometido antes de la instalación del parche de seguridad. La secuencia de movimiento lateral no fue documentada en detalle; se detectaron archivos cifrados en servidores internos y se aisló la infraestructura para limitar una mayor extensión. El hospital quedó excluido de la atención de urgencias durante 13 días y desvió ambulancias mientras recuperaba progresivamente sus sistemas.',
     zonesAffected: [
       'conectividad_externa',
       'infraestructura_ti',
@@ -415,48 +417,48 @@ export const INCIDENT_CASES: IncidentCase[] = [
       },
     ],
     consequences: [
-      'Cierre operativo del servicio de Urgencias durante 13 días consecutivos',
-      'Desvío de una paciente crítica a Wuppertal, derivando en su fallecimiento en traslado',
+      'Cierre/exclusión de urgencias durante 13 días y desvío de ambulancias',
       'Cancelación de cientos de cirugías programadas y consultas',
     ],
     containmentAction:
       'Desconexión de pasarelas perimetrales, contacto policial y obtención de clave de descifrado tras advertir a los atacantes del carácter hospitalario.',
     // Campos exactos de Tabla 3 y Tabla 4 (Massaccesi, 2026)
     vectorEntradaInicial:
-      'Vulnerabilidad en software Citrix (CVE-2019-19781) de proveedor externo; acceso remoto comprometido.',
+      'Compromiso previo de un Citrix NetScaler Gateway utilizado para acceso remoto, mediante una vulnerabilidad explotada antes de la instalación del parche de seguridad.',
     tecnicaMovimientoLateral:
-      'Movimiento progresivo desde el punto de entrada hacia servidores internos; cifrado gradual de más de 30 servidores.',
+      'La secuencia de movimiento lateral no fue documentada en detalle; se detectaron archivos cifrados en servidores internos y se aisló la infraestructura para limitar una mayor extensión.',
     trayectoriaZonasTexto:
-      'Conectividad externa y cadena de suministro → infra. TI (30+ servidores) → gestión clínica asistencial → urgencias y atención crítica.',
+      'Conectividad externa / acceso remoto → infraestructura TI → gestión clínica-asistencial → urgencias y atención crítica.',
     cronologia:
-      'Colapso: 10/09/2020; urgencias cerradas hasta el 23/09; recuperación en 13 días.',
+      'Detección: 10/09/2020; exclusión de la atención de urgencias durante 13 días; recuperación progresiva de los sistemas.',
     patronPropagacion:
-      'Vertical en cascada. Desde proveedor externo hacia zonas clínicas críticas.',
-    zonaEntrada: 'Conectividad externa y cadena de suministro',
+      'Vertical en cascada. Desde un servicio de acceso remoto comprometido hacia infraestructura y zonas clínicas dependientes.',
+    zonaEntrada: 'Conectividad externa / acceso remoto',
     consecuenciaAsistencialExacta:
-      'Cierre de urgencias por 13 días. Desvío de ambulancias. Fallecimiento de una paciente derivada.',
+      'Cierre/exclusión de urgencias durante 13 días y desvío de ambulancias.',
     fuenteCorpus: 'Scroxton (2020); Comisión Europea (2025)',
+    nivelEvidenciaConceptual: 'PARCIALMENTE DOCUMENTADO',
     timeline: [
       {
         step: 1,
         phase: 'Vector de Entrada Perimetral',
         zoneId: 'conectividad_externa',
         description:
-          'Vulnerabilidad en software Citrix ADC (CVE-2019-19781) de proveedor externo; acceso remoto comprometido.',
+          'Compromiso previo de un Citrix NetScaler Gateway utilizado para acceso remoto, mediante una vulnerabilidad explotada antes de la instalación del parche de seguridad.',
         contained: false,
       },
       {
         step: 2,
-        phase: 'Descenso Vertical a Infraestructura',
+        phase: 'Afectación de Infraestructura Interna',
         zoneId: 'infraestructura_ti',
         description:
-          'Movimiento progresivo hacia servidores internos; cifrado gradual de más de 30 servidores centrales de cómputo y red.',
+          'La secuencia de movimiento lateral no fue documentada en detalle; se detectaron archivos cifrados en servidores internos.',
         dependencyInvolved: 'tecnica',
         contained: false,
       },
       {
         step: 3,
-        phase: 'Inoperatividad de Gestión Clínica',
+        phase: 'Inoperatividad de Gestión Clínica-Asistencial',
         zoneId: 'gestion_clinica',
         description:
           'Caída total del sistema de gestión hospitalaria (HIS) y bloqueo de admisiones e historias clínicas.',
@@ -465,10 +467,10 @@ export const INCIDENT_CASES: IncidentCase[] = [
       },
       {
         step: 4,
-        phase: 'Cierre Letal de Urgencias',
+        phase: 'Exclusión de la Atención de Urgencias',
         zoneId: 'urgencias_critica',
         description:
-          'Cierre de urgencias por 13 días. Desvío forzado de ambulancias; fallecimiento de una paciente crítica derivada a Wuppertal.',
+          'Cierre/exclusión de urgencias durante 13 días y desvío de ambulancias.',
         dependencyInvolved: 'operativa',
         contained: true,
       },
@@ -481,17 +483,17 @@ export const INCIDENT_CASES: IncidentCase[] = [
     year: 2021,
     country: 'Irlanda',
     threatActorOrMalware: 'Grupo Conti (Cobalt Strike / Ransomware)',
-    initialPoint: 'Endpoint de usuario comprometido vía phishing con documento malicioso de Excel',
-    initialZoneId: 'conectividad_externa',
+    initialPoint:
+      'Phishing: archivo Microsoft Excel malicioso abierto por un usuario el 18/03/2021, provocando una infección de malware en el endpoint inicial.',
+    initialZoneId: 'infraestructura_ti',
     trajectoryType: 'lateral_prolongada',
     configurationLabel: 'Configuración Lateral Prolongada',
     configurationColor: '#8b5cf6',
     summary:
-      'Fase sigilosa de más de 8 semanas de reconocimiento y movimiento lateral que cruzó dominios y afectó al 80% de los servicios sanitarios de Irlanda.',
+      'Fase prolongada de reconocimiento y movimiento lateral durante aproximadamente 8 semanas, desde un endpoint de usuario hasta la red nacional NHN y múltiples servicios sanitarios.',
     narrativeText:
-      'HSE muestra una configuración lateral prolongada, con una fase extensa de movimiento lateral antes de la activación del ransomware. Partió de un endpoint individual comprometido el 16 de marzo mediante un phishing con Excel; los operadores de Conti permanecieron dentro de la red durante ocho semanas sin ser detectados, mapeando el Directorio Activo, comprometiendo controladores de dominio y alcanzando hospitales en todo el país antes de desplegar el cifrado masivo el 14 de mayo, inutilizando más del 80% de la infraestructura sanitaria irlandesa.',
+      'HSE muestra una configuración lateral prolongada, con una fase extensa de reconocimiento y movimiento lateral antes de la activación del ransomware. El incidente comenzó en un endpoint de usuario comprometido mediante la apertura de un archivo Microsoft Excel malicioso el 18 de marzo de 2021. Desde ese punto la intrusión alcanzó la red nacional NHN y la infraestructura TI, y posteriormente afectó servicios diagnósticos y asistenciales antes del despliegue del ransomware el 14 de mayo.',
     zonesAffected: [
-      'conectividad_externa',
       'infraestructura_ti',
       'diagnostico_imagen',
       'laboratorio_farmacia',
@@ -526,26 +528,27 @@ export const INCIDENT_CASES: IncidentCase[] = [
       'Desconexión manual de emergencia de la red nacional sanitaria (NHN), asistencia militar y reconstrucción forense integral.',
     // Campos exactos de Tabla 3 y Tabla 4 (Massaccesi, 2026)
     vectorEntradaInicial:
-      'Phishing: archivo Excel malicioso (16/03/2021); TrickBot como loader inicial sobre endpoint de usuario.',
+      'Phishing: archivo Microsoft Excel malicioso abierto por un usuario el 18/03/2021, provocando una infección de malware en el endpoint inicial.',
     tecnicaMovimientoLateral:
-      'Cobalt Strike Beacon para movimiento lateral, reconocimiento y escalada de privilegios; 8 semanas de operación silenciosa.',
+      'Cobalt Strike Beacon para reconocimiento, escalada de privilegios y movimiento lateral; aproximadamente 8 semanas de permanencia previa al despliegue del ransomware.',
     trayectoriaZonasTexto:
-      'Endpoint de usuario → red nacional NHN → infra. TI (80.000 terminales) → radiología → laboratorio y patología → maternidad y oncología → atención primaria.',
+      'Endpoint de usuario → red nacional NHN → infraestructura TI → radiología → laboratorio y patología → maternidad y oncología → atención primaria.',
     cronologia:
-      '8 semanas de movimiento lateral (16/03 → 14/05/2021); recuperación: más de 4 meses.',
+      '8 semanas de movimiento lateral (18/03 → 14/05/2021); recuperación: más de 4 meses.',
     patronPropagacion:
       'Lateral prolongada con activación nacional diferida; reconocimiento extenso previo al cifrado.',
     zonaEntrada: 'Endpoint de usuario (phishing)',
     consecuenciaAsistencialExacta:
       '80.000 terminales apagadas. Recuperación de 4 meses. Costo: USD 83 M. Numerosos pacientes afectados.',
     fuenteCorpus: 'HSE (2021)',
+    nivelEvidenciaConceptual: 'CONFIRMADO',
     timeline: [
       {
         step: 1,
-        phase: 'Vector Inicial: Phishing de Endpoint',
-        zoneId: 'conectividad_externa',
+        phase: 'Entrada desde un Endpoint de Usuario',
+        zoneId: 'infraestructura_ti',
         description:
-          'Phishing con archivo Excel malicioso (16/03/2021); TrickBot como loader inicial sobre endpoint de usuario.',
+          'El incidente comenzó en un endpoint de usuario comprometido. Desde ese punto la intrusión alcanzó la red nacional NHN y la infraestructura TI.',
         contained: false,
       },
       {
@@ -553,7 +556,7 @@ export const INCIDENT_CASES: IncidentCase[] = [
         phase: 'Movimiento Lateral Silencioso (8 Semanas)',
         zoneId: 'infraestructura_ti',
         description:
-          'Cobalt Strike Beacon para reconocimiento de Active Directory y escalada de privilegios en la red nacional NHN (80.000 terminales expuestas).',
+          'Cobalt Strike Beacon para reconocimiento, escalada de privilegios y movimiento lateral; aproximadamente 8 semanas de permanencia previa al despliegue del ransomware.',
         dependencyInvolved: 'tecnica',
         contained: false,
       },
@@ -589,7 +592,7 @@ export const INCIDENT_CASES: IncidentCase[] = [
         phase: 'Apagado Defensivo y Colapso Crítico',
         zoneId: 'urgencias_critica',
         description:
-          'Desconexión total de emergencia; atención en urgencias en modo degradado en papel durante 4 meses (USD 83 M).',
+          'Desconexión total de emergencia y atención en urgencias en modo degradado durante una recuperación de más de 4 meses.',
         dependencyInvolved: 'operativa',
         contained: true,
       },
@@ -602,7 +605,8 @@ export const INCIDENT_CASES: IncidentCase[] = [
     year: 2023,
     country: 'España',
     threatActorOrMalware: 'Grupo RansomHouse',
-    initialPoint: 'Doble extorsión con cifrado y exfiltración de 4,5 TB de datos de pacientes',
+    initialPoint:
+      'Vector inicial no divulgado públicamente; ataque de ransomware con cifrado y exfiltración de información.',
     initialZoneId: 'laboratorio_farmacia',
     trajectoryType: 'intra_interorganizacional',
     configurationLabel: 'Intra e Interorganizacional',
@@ -610,7 +614,7 @@ export const INCIDENT_CASES: IncidentCase[] = [
     summary:
       'Propagación intraorganizacional interna con extensión hacia la red de centros de atención primaria (CAPs) vinculados al consorcio hospitalario.',
     narrativeText:
-      'El Clínic mostró una propagación intraorganizacional con extensión interorganizacional hacia su red asistencial vinculada. El incidente afectó los sistemas de laboratorio, urgencias y gestión clínica en tres sedes, exfiltrando 4,5 TB de información. La integración con los tres Centros de Atención Primaria (CAPs) y centros adscritos propagó la parálisis, forzando la desprogramación de 150 cirugías complejas y más de 4.000 analíticas.',
+      'El Clínic mostró una propagación intraorganizacional con extensión interorganizacional hacia su red asistencial vinculada. El vector inicial y la secuencia técnica de movimiento lateral no fueron divulgados públicamente. La documentación permitió identificar la afectación de múltiples sistemas y servicios vinculados al Clínic, con laboratorio y farmacia como primera zona identificable dentro de la trayectoria reconstruida, sin presentarla como punto de entrada confirmado.',
     zonesAffected: [
       'laboratorio_farmacia',
       'urgencias_critica',
@@ -640,25 +644,26 @@ export const INCIDENT_CASES: IncidentCase[] = [
       'Aislamiento de la infraestructura con coordinación de la Agencia de Ciberseguridad de Cataluña y recuperación forense mediante copias limpias.',
     // Campos exactos de Tabla 3 y Tabla 4 (Massaccesi, 2026)
     vectorEntradaInicial:
-      'No divulgado por completo; doble extorsión: cifrado y exfiltración simultánea desde el inicio.',
+      'Vector inicial no divulgado públicamente; ataque de ransomware con cifrado y exfiltración de información.',
     tecnicaMovimientoLateral:
-      'Propagación simultánea entre zonas funcionales; extensión posterior hacia sedes y red del consorcio sanitario.',
+      'La secuencia técnica de movimiento lateral no fue divulgada públicamente; se documentó la afectación de múltiples sistemas y servicios vinculados al Clínic.',
     trayectoriaZonasTexto:
       'Laboratorio y farmacia → urgencias y atención crítica (3 sedes) → intercambio de información (4,5 TB exfiltrados) → atención primaria y ambulatorios del consorcio.',
     cronologia: 'Detección: 05/03/2023.',
     patronPropagacion:
       'Intraorganizacional entre zonas, con extensión interorganizacional hacia la red sanitaria vinculada.',
-    zonaEntrada: 'Múltiple / no divulgada (laboratorio y farmacia)',
+    zonaEntrada: 'No divulgado públicamente',
     consecuenciaAsistencialExacta:
       '150 cirugías canceladas. Coordinación de urgencias con otros hospitales. Datos publicados.',
     fuenteCorpus: 'Hospital Clínic de Barcelona (2023)',
+    nivelEvidenciaConceptual: 'PARCIALMENTE DOCUMENTADO',
     timeline: [
       {
         step: 1,
-        phase: 'Vector y Doble Extorsión',
+        phase: 'Primera Zona Identificable',
         zoneId: 'laboratorio_farmacia',
         description:
-          'Cifrado y exfiltración simultánea desde el inicio; bloqueo de sistemas automatizados de laboratorio y farmacia.',
+          'El vector inicial no fue divulgado públicamente. Laboratorio y farmacia se muestra como primera zona identificable dentro de la trayectoria reconstruida, no como punto de entrada confirmado.',
         contained: false,
       },
       {
@@ -705,7 +710,7 @@ export const INCIDENT_CASES: IncidentCase[] = [
     summary:
       'El compromiso de un intermediario de compensación crítico paralizó el flujo financiero y de recetas en miles de hospitales y farmacias en todo EE.UU.',
     narrativeText:
-      'Change Healthcare permite observar una configuración ecosistémica, porque la afectación de un intermediario crítico termina produciendo consecuencias sobre múltiples organizaciones dependientes en todo el país. Change Healthcare procesa 15.000 millones de transacciones de salud al año. Los atacantes utilizaron credenciales robadas en un servidor Citrix sin MFA el 12 de febrero de 2024; tras 9 días de movimiento lateral y exfiltrar 6 TB de datos, el despliegue del ransomware el 21 de febrero paralizó la validación de seguros y la dispensación de recetas en farmacias, afectando al 74% de los hospitales de EE. UU.',
+      'Change Healthcare permite observar una configuración ecosistémica, porque la afectación de un intermediario crítico termina produciendo consecuencias sobre múltiples organizaciones dependientes. Los atacantes utilizaron credenciales robadas en un servidor Citrix sin MFA el 12 de febrero de 2024; tras 9 días de movimiento lateral interno y exfiltración de información, el ransomware fue desplegado el 21 de febrero. En una encuesta de la AHA, el 74 % de los hospitales participantes informó impactos sobre la atención directa. Aproximadamente 192,7 millones de personas fueron afectadas por la brecha de datos.',
     zonesAffected: [
       'conectividad_externa',
       'infraestructura_ti',
@@ -731,8 +736,8 @@ export const INCIDENT_CASES: IncidentCase[] = [
       },
     ],
     consequences: [
-      '74% de los hospitales de EE. UU. afectados en cobros y gestión',
-      'Datos de 190 millones de personas comprometidos',
+      'En una encuesta de la AHA, el 74 % de los hospitales participantes informó impactos sobre la atención directa',
+      'Aproximadamente 192,7 millones de personas fueron afectadas por la brecha de datos',
       'Incapacidad de retirar medicamentos vitales en farmacias de todo el país',
       'Costo de recuperación e impacto superior a USD 1.500 millones',
     ],
@@ -742,17 +747,18 @@ export const INCIDENT_CASES: IncidentCase[] = [
     vectorEntradaInicial:
       'Credenciales robadas en servidor de acceso remoto Citrix sin MFA; acceso inicial: 12/02/2024.',
     tecnicaMovimientoLateral:
-      'Movimiento lateral interno durante 9 días; exfiltración de 6 TB antes del despliegue del ransomware (21/02/2024).',
+      'Movimiento lateral interno durante 9 días y exfiltración de información antes del despliegue del ransomware el 21/02/2024.',
     trayectoriaZonasTexto:
-      'Servidor remoto → infra. TI de CHC → sistemas de procesamiento → farmacia y dispensación → autorización y elegibilidad → gestión clínica.',
+      'Servidor remoto → infraestructura TI de CHC → sistemas de procesamiento → farmacia y dispensación → autorización y elegibilidad → gestión clínica.',
     cronologia:
       '9 días entre acceso y cifrado (12/02 → 21/02/2024); recuperación parcial: 2 semanas; costo: más de USD 1.500 M.',
     patronPropagacion:
-      'Ecosistémica por intermediario crítico. Un único nodo de la cadena de suministro digital genera impacto nacional.',
+      'Ecosistémica por intermediario crítico.',
     zonaEntrada: 'Conectividad externa (acceso remoto sin MFA)',
     consecuenciaAsistencialExacta:
-      '74 % de los hospitales de EE. UU. afectados. Datos de 190 millones de personas comprometidos.',
+      'En una encuesta de la AHA, el 74 % de los hospitales participantes informó impactos sobre la atención directa. Aproximadamente 192,7 millones de personas fueron afectadas por la brecha de datos.',
     fuenteCorpus: 'AHA (2024)',
+    nivelEvidenciaConceptual: 'PARCIALMENTE DOCUMENTADO',
     timeline: [
       {
         step: 1,
@@ -764,10 +770,10 @@ export const INCIDENT_CASES: IncidentCase[] = [
       },
       {
         step: 2,
-        phase: 'Movimiento Lateral y Exfiltración de 6 TB',
+        phase: 'Movimiento Lateral y Exfiltración',
         zoneId: 'infraestructura_ti',
         description:
-          'Movimiento lateral sigiloso durante 9 días; exfiltración masiva de 6 TB de datos de pacientes antes del cifrado (21/02/2024).',
+          'Movimiento lateral interno durante 9 días y exfiltración de información antes del despliegue del ransomware el 21/02/2024.',
         dependencyInvolved: 'tecnica',
         contained: false,
       },
@@ -794,7 +800,7 @@ export const INCIDENT_CASES: IncidentCase[] = [
         phase: 'Parálisis Financiera y Asistencial',
         zoneId: 'gestion_clinica',
         description:
-          '74% de los hospitales de EE. UU. sufren colapso de flujo de caja y gestión clínica; datos de 190 millones de personas expuestos.',
+          'En una encuesta de la AHA, el 74 % de los hospitales participantes informó impactos sobre la atención directa. Aproximadamente 192,7 millones de personas fueron afectadas por la brecha de datos.',
         dependencyInvolved: 'operativa',
         contained: true,
       },
@@ -807,15 +813,15 @@ export const INCIDENT_CASES: IncidentCase[] = [
     year: 2023,
     country: 'Estados Unidos',
     threatActorOrMalware: 'Ataque de Ransomware corporativo',
-    initialPoint: 'Infiltración en infraestructura central corporativa compartida',
+    initialPoint: 'No divulgado por completo; actividad no autorizada detectada el 23/11/2023.',
     initialZoneId: 'infraestructura_ti',
     trajectoryType: 'multisitio_centralizada',
     configurationLabel: 'Intrared Corporativa Multi-sitio',
     configurationColor: '#ec4899',
     summary:
-      'Efecto de amplificación por infraestructura tecnológica centralizada que deshabilitó servicios en 30 hospitales simultáneamente.',
+      'La afectación simultánea resultó compatible con un efecto de amplificación asociado a infraestructura TI centralizada compartida entre 30 instituciones.',
     narrativeText:
-      'Ardent presentó una configuración intrared corporativa multi-sitio, compatible con un efecto de amplificación asociado a infraestructura tecnológica centralizada. Ardent operaba 30 hospitales y más de 200 centros de atención en Texas, Oklahoma, Idaho, New Jersey y Kansas bajo una gestión de TI consolidada. Cuando los servidores corporativos fueron atacados el 23 de noviembre de 2023, la arquitectura centralizada propagó la indisponibilidad hacia todas las sedes geográficas, forzando la desconexión del software Epic EMR durante 14 días y el desvío de urgencias en múltiples estados.',
+      'Ardent presentó una configuración intrared corporativa multi-sitio. El vector inicial no fue divulgado por completo y se detectó actividad no autorizada el 23 de noviembre de 2023. La trayectoria se infiere a partir de la afectación de infraestructura de TI corporativa centralizada compartida entre 30 instituciones. La afectación simultánea resultó compatible con un efecto de amplificación asociado a esa infraestructura, sin que exista evidencia forense pública suficiente para presentar la trayectoria completa como causalidad técnicamente confirmada.',
     zonesAffected: [
       'infraestructura_ti',
       'gestion_clinica',
@@ -845,26 +851,27 @@ export const INCIDENT_CASES: IncidentCase[] = [
       'Desconexión preventiva intencional de todos los sistemas corporativos e investigación forense para restauración sede por sede.',
     // Campos exactos de Tabla 3 y Tabla 4 (Massaccesi, 2026)
     vectorEntradaInicial:
-      'No divulgado por completo; actividad no autorizada detectada el 23/11/2023; CISA notificó actividad sospechosa previa.',
+      'No divulgado por completo; actividad no autorizada detectada el 23/11/2023.',
     tecnicaMovimientoLateral:
-      'Propagación a través de infraestructura de TI corporativa centralizada compartida entre 30 instituciones (Epic EMR, servidores corporativos).',
+      'Trayectoria inferida a partir de la afectación de infraestructura de TI corporativa centralizada compartida entre 30 instituciones.',
     trayectoriaZonasTexto:
-      'Infra. TI corporativa centralizada → Epic EMR (30 hospitales) → gestión clínica asistencial → urgencias (múltiples estados) → telemedicina y portales de pacientes.',
+      'Infraestructura TI corporativa centralizada → Epic EMR (30 hospitales) → gestión clínica-asistencial → urgencias → telemedicina y portales de pacientes.',
     cronologia:
       'Detección: 23/11/2023; Epic restaurado: 07/12 (14 días); MyChart restaurado: 16/01/2024 (54 días); ~40.000 pacientes expuestos.',
     patronPropagacion:
-      'Intrared corporativa multi-sitio. La TI centralizada actuó como vector de amplificación simultánea.',
-    zonaEntrada: 'Infra. TI corporativa centralizada',
+      'Intrared corporativa multi-sitio. Amplificación simultánea compatible con una infraestructura de TI centralizada.',
+    zonaEntrada: 'Infraestructura TI corporativa centralizada',
     consecuenciaAsistencialExacta:
       '30 hospitales afectados en 6 estados. Epic inactivo 14 días. ~40.000 pacientes expuestos.',
     fuenteCorpus: 'Ardent Health Services (2023)',
+    nivelEvidenciaConceptual: 'INFERIDO',
     timeline: [
       {
         step: 1,
-        phase: 'Intrusión en Servidores Corporativos Centrales',
+        phase: 'Actividad no Autorizada Detectada',
         zoneId: 'infraestructura_ti',
         description:
-          'Actividad no autorizada detectada el 23/11/2023 en la infraestructura central que conecta a 30 hospitales.',
+          'Vector no divulgado por completo; actividad no autorizada detectada el 23/11/2023.',
         contained: false,
       },
       {
@@ -872,7 +879,7 @@ export const INCIDENT_CASES: IncidentCase[] = [
         phase: 'Amplificación Simultánea sobre Epic EMR',
         zoneId: 'gestion_clinica',
         description:
-          'La TI corporativa centralizada actúa como vector de amplificación simultánea; caída del sistema Epic EMR en los 30 hospitales.',
+          'La afectación simultánea de Epic EMR en 30 hospitales resultó compatible con un efecto de amplificación asociado a infraestructura TI centralizada.',
         dependencyInvolved: 'tecnica',
         contained: false,
       },
@@ -957,7 +964,7 @@ export const DEFENSE_SECTIONS: DefenseSection[] = [
     keyConcepts: [
       'Dependencia Técnica (infraestructura, cómputo y redes compartidas)',
       'Dependencia Operativa (parálisis por falta del servicio de un tercero)',
-      'Dependencia de Información (flujos de datos clínicos vitales HL7/DICOM)',
+      'Intercambio de información (flujos de datos clínicos vitales HL7/DICOM)',
       'Las dependencias NO son mecanismos de ataque, son relaciones preexistentes',
     ],
     highlightQuote:
