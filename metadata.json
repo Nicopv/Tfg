@@ -1,0 +1,6 @@
+{
+  "name": "Propagación de Riesgo Cibernético en Salud",
+  "description": "Plataforma de análisis sistémico de propagación del riesgo cibernético entre zonas funcionales en entornos de salud conectados mediante grafos interactivos y matriz comparativa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

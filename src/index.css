@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@keyframes flowDash {
+  from {
+    stroke-dashoffset: 40;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    r: 32;
+    opacity: 0.85;
+  }
+  50% {
+    r: 46;
+    opacity: 0.15;
+  }
+}
+
+.animate-flow-dash {
+  stroke-dasharray: 8 4;
+  animation: flowDash 0.9s linear infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
