@@ -16,7 +16,6 @@ import {
   AlertTriangle,
   ArrowRight,
   Clock,
-  ShieldAlert,
   ExternalLink,
 } from 'lucide-react';
 import { FUNCTIONAL_ZONES, DEPENDENCIES, INCIDENT_CASES } from '../data/thesisContent';
@@ -1225,49 +1224,35 @@ export const D3DependencyGraph: React.FC<D3DependencyGraphProps> = ({
           style={{ minHeight: '480px' }}
         />
 
-        {/* Floating Simulation Step HUD Banner */}
+        {/* Compact simulation step indicator */}
         {activeCase && simState && (
-          <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-xl bg-white/95 backdrop-blur-md rounded-2xl border border-rose-200 p-3.5 shadow-xl z-10 space-y-2 animate-in fade-in duration-200">
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping" />
-                <span className="text-2xs font-extrabold uppercase tracking-wider text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">
-                  Paso {simState.safeIndex + 1} de {activeCase.timeline.length}: {simState.currentEvent.phase}
-                </span>
-              </div>
-              {simState.currentEvent.dependencyInvolved && (
+          <div
+            className="absolute bottom-3 left-3 z-10 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-xl border border-white/10 bg-slate-950/90 px-2.5 py-2 text-white shadow-lg backdrop-blur-md animate-in fade-in duration-200 sm:max-w-md"
+            title={simState.currentEvent.description}
+          >
+            <span className="flex h-6 min-w-6 items-center justify-center rounded-md bg-rose-500 px-1.5 text-2xs font-extrabold tabular-nums">
+              {simState.safeIndex + 1}/{activeCase.timeline.length}
+            </span>
+
+            <span className="min-w-0 truncate text-xs font-semibold">
+              {simState.currentEvent.phase}
+            </span>
+
+            {simState.currentEvent.dependencyInvolved && (
+              <span className="ml-auto flex shrink-0 items-center gap-1 text-2xs font-medium text-slate-300">
                 <span
-                  className={`text-2xs font-bold px-2 py-0.5 rounded-md border ${
-                    DEPENDENCY_METAS[simState.currentEvent.dependencyInvolved]?.bg || 'bg-slate-100'
-                  }`}
-                >
-                  Vía: {DEPENDENCY_METAS[simState.currentEvent.dependencyInvolved]?.label || simState.currentEvent.dependencyInvolved}
-                </span>
-              )}
-            </div>
-
-            <p className="text-xs text-slate-800 font-medium leading-relaxed">
-              {simState.currentEvent.description}
-            </p>
-
-            {/* If final step, show systemic impact from Table 4 */}
-            {simState.isFinalStep && (
-              <div className="pt-2 border-t border-rose-100 bg-rose-50/70 -mx-3.5 -mb-3.5 p-3 rounded-b-2xl">
-                <div className="flex items-start gap-2">
-                  <ShieldAlert className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-2xs font-bold uppercase tracking-wider text-rose-800 block">
-                      Consecuencia Asistencial Directa (Tabla 4 TFG):
-                    </span>
-                    <p className="text-xs font-semibold text-rose-950 mt-0.5">
-                      {activeCase.consecuenciaAsistencialExacta || activeCase.consequences[0]}
-                    </p>
-                    <span className="text-3xs text-rose-700/80 block mt-1">
-                      Cronología: {activeCase.cronologia} | Fuente: {activeCase.fuenteCorpus}
-                    </span>
-                  </div>
-                </div>
-              </div>
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{
+                    backgroundColor:
+                      DEPENDENCY_METAS[simState.currentEvent.dependencyInvolved].stroke,
+                  }}
+                />
+                {simState.currentEvent.dependencyInvolved === 'tecnica'
+                  ? 'Técnica'
+                  : simState.currentEvent.dependencyInvolved === 'operativa'
+                    ? 'Operativa'
+                    : 'Información'}
+              </span>
             )}
           </div>
         )}
